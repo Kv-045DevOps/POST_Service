@@ -1,0 +1,25 @@
+[
+  {
+    "Department": {
+      "name": "Ben"
+    }
+  },
+  {
+    "Team": {
+      "depart_id": 1,
+      "name": "Viktor",
+      "manager_id": 5
+    }
+  },
+  {
+    "Employee": {
+      "team_id": 11,
+      "name": "Dmitriy",
+      "sname": "Dimin",
+      "exp": 3,
+      "position": "Manager",
+      "salary": 1500,
+      "coefficient": 1
+    }
+  }
+]
