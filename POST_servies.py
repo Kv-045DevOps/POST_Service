@@ -1,30 +1,16 @@
-from flask import Flask
-import json
+from flask import Flask, jsonify, request
 
-"""Parsing!!!"""
-#-------------------------------------------------------------
-pull_json = json.load(open('all_persons.json'))
-Department = pull_json[0]
-Team = pull_json[1]
-Employee = pull_json[2]
-print(Department, Team, Employee)
-
-with open('department.json', 'w') as file:
-    json.dump(Department, file, indent=2, ensure_ascii=False)
-
-with open('team.json', 'w') as file:
-    json.dump(Team, file, indent=2, ensure_ascii=False)
-
-with open('employee.json', 'w') as file:
-    json.dump(Employee, file, indent=2, ensure_ascii=False)
-#-------------------------------------------------------------
+app = Flask(__name__)
 
 
-# app = Flask(__name__)
-#
-# @app.route('/')
-# def index():
-#     return "<h1> Test </h1>"
-#
-# if __name__ == '__main__':
-#     app.run(debug=True)
+@app.route('/posting', methods=['POST'])
+def posting():
+    data = request.get_json()
+    Department = data[0]
+    Team = data[1]
+    Employee = data[2]
+    return jsonify(Department, Team, Employee)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
