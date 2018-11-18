@@ -1,14 +1,11 @@
 from flask import Flask, jsonify, request
 from requests import post
+import json
 
 app = Flask(__name__)
 
 @app.route('/posting', methods=['POST'])
 def posting():
-    data = request.get_json()
-    Department = data[0]
-    Team = data[1]
-    Employee = data[2]
 
     def send_json1(sendjson1):
         sendjson1 = post("https://reqres.in/api/users:5001", json=sendjson1, headers={"Content-type": "application/json"})
@@ -19,11 +16,34 @@ def posting():
     def send_json3(sendjson3):
         sendjson3 = post("https://reqres.in/api/users:5003", json=sendjson3, headers={"Content-type": "application/json"})
         print(sendjson3.text)
-    send_json1(Department)
-    send_json2(Team)
-    send_json3(Employee)
 
-    return jsonify(Department, Team, Employee)
+    datajson = request.data
+    data = json.loads(datajson)
+
+    try:
+        Department = data["department"]
+        send_json1(Department)
+    except:
+        pass
+    try:
+        Team = data["team"]
+        send_json2(Team)
+    except:
+        pass
+    try:
+        Employee = data["employee"]
+        send_json3(Employee)
+    except:
+        pass
+    """{"department": {"name": "1"}, "team": {"depart_id": "1", "name": "1", "manager_id": "1"}, "employee": {"team_id": "1", "name": "1", "sname": "1", "exp": "1", "position": "1", "salary": "1", "coefficient": "1"}}"""
+
+    # data = request.get_json()
+    # Department = data[0]
+    # Team = data[1]
+    # Employee = data[2]
+    """[{"department":{"name": "Ben"}},{"team":{"depart_id":"1","name":"Viktor","manager_id":"5"}},{"employee":{"team_id":"11","name":"Dmitriy","sname":"Dimin","exp":"3","position":"Manager","salary":"1500","coefficient":"1"}}]"""
+
+    return 'jsonify(Department, Team, Employee)'
 
 
 if __name__ == '__main__':
