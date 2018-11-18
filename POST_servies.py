@@ -20,30 +20,40 @@ def posting():
     datajson = request.data
     data = json.loads(datajson)
 
-    try:
-        Department = data["department"]
-        send_json1(Department)
-    except:
-        pass
-    try:
-        Team = data["team"]
-        send_json2(Team)
-    except:
-        pass
-    try:
-        Employee = data["employee"]
-        send_json3(Employee)
-    except:
-        pass
+    for i in data:
+        if i == "department":
+            Department = data["department"]
+            if Department == None:
+                pass
+            else:
+                send_json1(Department)
+        elif i == "team":
+            Team = data["team"]
+            if Team == None:
+                pass
+            else:
+                send_json2(Team)
+        elif i == "employee":
+            Employee = data["employee"]
+            if Employee == None:
+                pass
+            else:
+                send_json3(Employee)
+        else:
+            pass
+
     """{"department": {"name": "1"}, "team": {"depart_id": "1", "name": "1", "manager_id": "1"}, "employee": {"team_id": "1", "name": "1", "sname": "1", "exp": "1", "position": "1", "salary": "1", "coefficient": "1"}}"""
 
+
+    """ version for another format json:
     # data = request.get_json()
     # Department = data[0]
     # Team = data[1]
     # Employee = data[2]
-    """[{"department":{"name": "Ben"}},{"team":{"depart_id":"1","name":"Viktor","manager_id":"5"}},{"employee":{"team_id":"11","name":"Dmitriy","sname":"Dimin","exp":"3","position":"Manager","salary":"1500","coefficient":"1"}}]"""
+    
+    [{"department":{"name": "Ben"}},{"team":{"depart_id":"1","name":"Viktor","manager_id":"5"}},{"employee":{"team_id":"11","name":"Dmitriy","sname":"Dimin","exp":"3","position":"Manager","salary":"1500","coefficient":"1"}}]"""
 
-    return 'jsonify(Department, Team, Employee)'
+    return jsonify(data)
 
 
 if __name__ == '__main__':
