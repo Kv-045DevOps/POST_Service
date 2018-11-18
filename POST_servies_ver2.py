@@ -19,37 +19,36 @@ def posting():
         sendjson3 = post("https://reqres.in/api/users:5003", json=sendjson3, headers={"Content-type": "application/json"})
         print(sendjson3.text)
 
-    if "department" in dataDict and dataDict["department"]:
-        data2send = {}
-        for key in dataDict["department"]:
-            data2send[key] = dataDict["department"][key]
-            send_json1(data2send)
-    elif "team" in dataDict and dataDict["team"]:
-        data2send = {}
-        for key in dataDict["team"]:
-            data2send[key] = dataDict["team"][key]
-            send_json2(data2send)
-    elif "employee" in dataDict and dataDict["employee"]:
-        data2send = {}
-        for key in dataDict["employee"]:
-            data2send[key] = dataDict["employee"][key]
-            send_json3(data2send)
-    else:
-        pass
+    for i in dataDict:
+        if i == "department":
+            Department = dataDict["department"]
+            send_json1(Department)
+        elif i == "team":
+            Team = dataDict["team"]
+            send_json2(Team)
+        elif i == "employee":
+            Employee = dataDict["employee"]
+            send_json3(Employee)
+        else:
+            pass
 
-    # for i in dataDict:
-    #     if i == "department":
-    #         Department = dataDict["department"]
-    #         send_json1(Department)
-    #     elif i == "team":
-    #         Team = dataDict["team"]
-    #         send_json2(Team)
-    #     elif i == "employee":
-    #         Employee = dataDict["employee"]
-    #         send_json3(Employee)
-    #     else:
-    #         pass
-
+    # if "department" in dataDict and dataDict["department"]:
+    #     data2send = {}
+    #     for key in dataDict["department"]:
+    #         data2send[key] = dataDict["department"][key]
+    #         send_json1(data2send)
+    # elif "team" in dataDict and dataDict["team"]:
+    #     data2send = {}
+    #     for key in dataDict["team"]:
+    #         data2send[key] = dataDict["team"][key]
+    #         send_json2(data2send)
+    # elif "employee" in dataDict and dataDict["employee"]:
+    #     data2send = {}
+    #     for key in dataDict["employee"]:
+    #         data2send[key] = dataDict["employee"][key]
+    #         send_json3(data2send)
+    # else:
+    #     pass
 
     # Department = dataDict["department"]
     # Team = dataDict["team"]
@@ -59,6 +58,26 @@ def posting():
     # send_json2(Team)
     # send_json3(Employee)
 
+    """
+        # try:
+        #     Department = data["department"]
+        #     if Department["department"] == None:
+        #         pass
+        #     else:
+        #         send_json1(Department)
+        # except:
+        #     pass
+        # try:
+        #     Team = data["team"]
+        #     send_json2(Team)
+        # except:
+        #     pass
+        # try:
+        #     Employee = data["employee"]
+        #     send_json3(Employee)
+        # except:
+        #     pass
+    """
     return jsonify(dataDict)
 
 
