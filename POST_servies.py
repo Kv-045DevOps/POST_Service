@@ -8,13 +8,13 @@ app = Flask(__name__)
 def posting():
 
     def send_json1(sendjson1):
-        sendjson1 = post("https://reqres.in/api/users:5001", json=sendjson1, headers={"Content-type": "application/json"})
+        sendjson1 = post("https://127.0.0.1:5002/depart", json=sendjson1, headers={"Content-type": "application/json"})
         print(sendjson1.text)
     def send_json2(sendjson2):
-        sendjson2 = post("https://reqres.in/api/users:5002", json=sendjson2, headers={"Content-type": "application/json"})
+        sendjson2 = post("https://127.0.0.1:5002/team", json=sendjson2, headers={"Content-type": "application/json"})
         print(sendjson2.text)
     def send_json3(sendjson3):
-        sendjson3 = post("https://reqres.in/api/users:5003", json=sendjson3, headers={"Content-type": "application/json"})
+        sendjson3 = post("https://127.0.0.1:5002/users", json=sendjson3, headers={"Content-type": "application/json"})
         print(sendjson3.text)
 
     datajson = request.data
@@ -53,7 +53,8 @@ def posting():
     
     [{"department":{"name": "Ben"}},{"team":{"depart_id":"1","name":"Viktor","manager_id":"5"}},{"employee":{"team_id":"11","name":"Dmitriy","sname":"Dimin","exp":"3","position":"Manager","salary":"1500","coefficient":"1"}}]"""
 
-    return jsonify(data)
+    return ""
+    #jsonify(data)
 
 
 if __name__ == '__main__':
