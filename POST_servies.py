@@ -29,8 +29,8 @@ def posting():
         # Check null in json function
         len_keys = len(little_json)
         len_value = 0
-        for i in little_json:
-            n = little_json[i]
+        for item in little_json:
+            n = little_json[item]
             if n == None:
                 len_value = 0
             else:
@@ -48,35 +48,36 @@ def posting():
     for i in data:
         if i == "department":
             Department = data["department"]
-            if Department == None:
+            if Department is None:
                 pass
             else:
-                if json_count(Department) == True:
+                if json_count(Department) is True:
                     send_json1(Department)
                 else:
                     msg = "Fill in all the fields"
 
         elif i == "team":
             Team = data["team"]
-            if Team == None:
+            if Team is None:
                 pass
             else:
-                if json_count(Team) == True:
+                if json_count(Team) is True:
                     send_json2(Team)
                 else:
                     msg = "Fill in all the fields"
 
         elif i == "employee":
             Employee = data["employee"]
-            if Employee == None:
+            if Employee is None:
                 pass
             else:
-                if json_count(Employee) == True:
+                if json_count(Employee) is True:
                     send_json3(Employee)
                 else:
                     msg = "Fill in all the fields"
         else:
             pass
+
     return jsonify(msg)
 
     # Example json: {"department": {"name": "1"}, "team": {"depart_id": "1", "name": "1", "manager_id": "1"}, "employee": {"team_id": "1", "name": "1", "sname": "1", "exp": "1", "position": "1", "salary": "1", "coefficient": "1"}}
